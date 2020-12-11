@@ -3,7 +3,7 @@ require "yaml"
 require "erb"
 
 class YamlSmoosher
-  VERSION = "0.1.3"
+  VERSION = "1.0.0"
 
   class << self
     def call(args)
