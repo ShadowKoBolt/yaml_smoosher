@@ -1,8 +1,9 @@
 require "deep_merge"
 require "yaml"
+require "erb"
 
 class YamlSmoosher
-  VERSION = "0.1.0"
+  VERSION = "0.1.3"
 
   class << self
     def call(args)
@@ -15,14 +16,29 @@ class YamlSmoosher
   end
 
   def call
-    files = Dir.glob(File.join(@path_to_folder, "/**/*.yml"))
-
     result = {}
 
-    files.each do |file|
-      result.deep_merge(YAML.safe_load(File.read(file)))
-    end
+    parse_yaml_files(result)
+    parse_yaml_erb_files(result)
 
     result
+  end
+
+  private
+
+  def parse_yaml_files(hash)
+    yaml_files = Dir.glob(File.join(@path_to_folder, "/**/*.yml"))
+
+    yaml_files.each do |yaml_file|
+      hash.deep_merge!(YAML.load(File.read(yaml_file)))
+    end
+  end
+
+  def parse_yaml_erb_files(hash)
+    yaml_files = Dir.glob(File.join(@path_to_folder, "/**/*.yml.erb"))
+
+    yaml_files.each do |yaml_erb_file|
+      hash.deep_merge!(YAML.load(ERB.new(File.read(yaml_erb_file)).result))
+    end
   end
 end

@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    yaml_smoosher (0.1.0)
-      deep_merge
+    yaml_smoosher (0.1.2)
+      deep_merge (~> 1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -33,7 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  pry
+  pry (~> 0.13)
   rake (~> 12.0)
   rspec (~> 3.0)
   yaml_smoosher!

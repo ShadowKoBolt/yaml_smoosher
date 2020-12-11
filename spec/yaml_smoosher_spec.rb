@@ -8,6 +8,6 @@ RSpec.describe YamlSmoosher do
 
     let(:path_to_folder) { File.join(__dir__, "support", "examples") }
 
-    it { is_expected.to eq("foo" => { "bar" => 1, "teapot" => 2 }) }
+    it { is_expected.to eq("foo" => { "bar" => 1, "teapot" => 2, "waffle" => 4 }) }
   end
 end
